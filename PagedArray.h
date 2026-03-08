@@ -1,0 +1,13 @@
+//
+// Created by grimm on 7/3/26.
+//
+
+#ifndef PROYECTO_DATOS_II_1_PAGED_ARRAYS_PAGEDARRAY_H
+#define PROYECTO_DATOS_II_1_PAGED_ARRAYS_PAGEDARRAY_H
+
+
+class PagedArray {
+};
+
+
+#endif //PROYECTO_DATOS_II_1_PAGED_ARRAYS_PAGEDARRAY_H

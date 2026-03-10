@@ -14,7 +14,7 @@ PagedArray::PagedArray(const char *filePath, int pageSize, int pageCount) {
 
     ptrPageFile = fopen(filePath, "r+b");
     if (ptrPageFile == nullptr) {
-        std::cerr << "Error: no se pudo abrir el archivo, path inexistente" << filePath << std::endl;
+        std::cerr << "Error: no se pudo abrir el archivo, path inexistente: " << filePath << std::endl;
         exit(1);
     }
 

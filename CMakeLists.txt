@@ -5,7 +5,12 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-add_executable(Proyecto_Datos_II_1_Paged_Arrays
+add_executable(generador
+        Generador.cpp
+)
+
+add_executable(sorter
         PagedArray.cpp
         PagedArray.h
-        README.md)
+        Sorter.cpp
+)

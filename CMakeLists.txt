@@ -12,5 +12,6 @@ add_executable(generador
 add_executable(sorter
         PagedArray.cpp
         PagedArray.h
+        AlgoritmosSorting.h
         Sorter.cpp
 )

@@ -47,6 +47,7 @@ PagedArray::~PagedArray() {
     fclose(ptrPageFile);
 }
 
+
 int& PagedArray::operator[](int index) {
     int pageNum = index / pageSize;
     int offset = index % pageSize;

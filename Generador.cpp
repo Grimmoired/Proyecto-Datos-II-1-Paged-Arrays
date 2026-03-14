@@ -35,13 +35,13 @@ int main(int argc, char* argv[]) {
 
     long long sizeConfiguracion = 0;
     if (strcmp(argv[2], "SMALL") == 0) {
-        sizeConfiguracion = 512;
+        sizeConfiguracion = 256;
     }
     else if (strcmp(argv[2], "MEDIUM") == 0) {
-        sizeConfiguracion = 1024;
+        sizeConfiguracion = 512;
     }
     else if (strcmp(argv[2], "LARGE") == 0) {
-        sizeConfiguracion = 2048;
+        sizeConfiguracion = 1024;
     }
 
     long long sizeBytes = (sizeConfiguracion * 1024LL * 1024LL);

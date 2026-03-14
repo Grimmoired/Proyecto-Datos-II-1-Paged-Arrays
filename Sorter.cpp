@@ -68,6 +68,15 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
+    fseek(inputPageFile, 0, SEEK_END);
+    long sizeEnBytes = ftell(inputPageFile);
+
+    if (strcmp(argv[6], "mergeSort") == 0 && sizeEnBytes > 536870912) {
+        std::cerr << "Error: " << argv[6] << " no es soportado por el tamaño LARGE debido a la complejidad de operaciones, escoja SMALL o MEDIUM." << std::endl;
+        exit(1);
+    }
+    fseek(inputPageFile, 0, SEEK_SET);
+
     outputPageFile = fopen(filePathOutput, "wb");
     if (outputPageFile == nullptr) {
         std::cerr << "Error: no se pudo abrir el archivo, path inexistente: " << filePathOutput << std::endl;

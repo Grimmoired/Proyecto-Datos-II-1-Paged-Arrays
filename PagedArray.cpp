@@ -31,7 +31,6 @@ PagedArray::PagedArray(const char *filePath, int pageSize, int pageCount) {
     }
 }
 
-
 PagedArray::~PagedArray() {
     for (int i = 0; i < pageCount; i++) {
         if (pages[i] != nullptr) {

@@ -14,8 +14,8 @@ private:
     FILE* ptrPageFile;
     int pageSize;
     int pageCount;
-    int faultCount;
-    int hitCount;
+    long long faultCount;
+    long long hitCount;
     int* pageNumArray;
     int arraySize;
     const char* filePath;
@@ -25,6 +25,9 @@ public:
     PagedArray(const char* filePath, int pageSize, int pageCount);
     ~PagedArray();
     int& operator[](int index);
+    int getArraySize();
+    long long getFaultCount();
+    long long getHitCount();
 };
 
 #endif //PROYECTO_DATOS_II_1_PAGED_ARRAYS_PAGEDARRAY_H

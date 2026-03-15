@@ -21,7 +21,7 @@ PagedArray::PagedArray(const char *filePath, int pageSize, int pageCount) {
     pages = new int*[pageCount];
     pageNumArray = new int[pageCount];
     fseek(ptrPageFile, 0, SEEK_END);
-    long sizeEnBytes = ftell(ptrPageFile);
+    long long sizeEnBytes = ftell(ptrPageFile);
     this-> arraySize = sizeEnBytes / 4;
     fseek(ptrPageFile, 0, SEEK_SET);
 
@@ -34,7 +34,7 @@ PagedArray::PagedArray(const char *filePath, int pageSize, int pageCount) {
 PagedArray::~PagedArray() {
     for (int i = 0; i < pageCount; i++) {
         if (pages[i] != nullptr) {
-            long posicion = (long)pageNumArray[i] * 4 * pageSize;
+            long long posicion = (long long)pageNumArray[i] * 4 * pageSize;
             fseek(ptrPageFile, posicion, SEEK_SET);
             fwrite(pages[i], sizeof(int), pageSize, ptrPageFile);
             delete[] pages[i];
@@ -62,7 +62,7 @@ int& PagedArray::operator[](int index) {
     faultCount++;
 
     if (pages[indexFIFO] != nullptr) {
-        long posicion = (long)pageNumArray[indexFIFO] * 4 * pageSize;
+        long long posicion = (long long)pageNumArray[indexFIFO] * 4 * pageSize;
         fseek(ptrPageFile, posicion, SEEK_SET);
         fwrite(pages[indexFIFO], sizeof(int), pageSize, ptrPageFile);
         delete[] pages[indexFIFO];
@@ -71,11 +71,23 @@ int& PagedArray::operator[](int index) {
 
     pages[indexFIFO] = new int[pageSize];
     pageNumArray[indexFIFO] = pageNum;
-    long posicion = (long)pageNumArray[indexFIFO] * 4 * pageSize;
+    long long posicion = (long long)pageNumArray[indexFIFO] * 4 * pageSize;
     fseek(ptrPageFile, posicion, SEEK_SET);
     fread(pages[indexFIFO], sizeof(int), pageSize, ptrPageFile);
     int espacioUsado = indexFIFO;
     indexFIFO = (indexFIFO + 1) % pageCount;
     return pages[espacioUsado][offset];
 
+}
+
+int PagedArray::getArraySize() {
+    return arraySize;
+}
+
+long long PagedArray::getHitCount() {
+    return hitCount;
+}
+
+long long PagedArray::getFaultCount() {
+    return faultCount;
 }

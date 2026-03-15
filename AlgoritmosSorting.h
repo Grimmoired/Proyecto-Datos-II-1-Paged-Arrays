@@ -7,22 +7,20 @@
 #include <iostream>
 #include "PagedArray.h"
 
-void bubbleSort (PagedArray& array, int n) {
-    for (int i = 0; i < n - 1; i++) {
-        bool swap = false;
-        for (int j = 0; j < n - i - 1; j++) {
-            if (array[j] > array[j + 1]) {
-                int copia = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = copia;
-                swap = true;
+void shellSort(PagedArray& array, int n) {   // Despues de hacer pruebas, es bastante lento en valores granes, aumentar el pageCount solo afecta negativamente, aumentar el pageSize casi no hace diferencia
+    for (int gap = n / 2; gap > 0; gap /= 2) {
+        for (int i = gap; i < n; i += 1) {
+            int temp = array[i];
+            int j;
+            for (j = i; j >= gap && array[j - gap] > temp; j -= gap) {
+                array[j] = array[j - gap];
             }
+            array[j] = temp;
         }
-        if (!swap) {break;}
     }
 }
 
-void insertionSort (PagedArray& array, int n) {
+void insertionSort (PagedArray& array, int n) {   // Despues de hacer pruebas, no fue capaz de ordenar tamaños de nisiquiera 1Mb, aumentar o disminuir pageSize o pageCount no parece hacer diferencia alguna
     for (int i = 1; i < n; i++) {
         int temp = array[i];
         int j = i - 1;
@@ -34,17 +32,36 @@ void insertionSort (PagedArray& array, int n) {
     }
 }
 
-void selectionSort (PagedArray& array, int n) {
-    for (int i = 0; i < n-1; i++) {
-        int min = i;
-        for (int j = i + 1; j < n; j++) {
-            if (array[j] < array[min]) {
-                min = j;
-            }
-        }
+void heapSortAux(PagedArray& array, int n, int i) {   // Despues de hacer pruebas, es de lejos el mas eficaz en tamaños muy pequeños, ej: 1Mb, pero conforme aumenta el tamaño su eficacia va disminuyendo exponencialmente, a tal punto de que al llegar a los 5Mb ya es ampliamente superado por mergeSort y quickSort
+    int mayor = i;
+    int izq = 2 * i + 1;
+    int der = 2 * i + 2;
+
+    if (izq < n && array[izq] > array[mayor]) {
+        mayor = izq;
+    }
+
+    if (der < n && array[der] > array[mayor]) {
+        mayor = der;
+    }
+
+    if (mayor != i) {
         int copia = array[i];
-        array[i] = array[min];
-        array[min] = copia;
+        array[i] = array[mayor];
+        array[mayor] = copia;
+        heapSortAux(array, n, mayor);
+    }
+}
+
+void heapSort(PagedArray& array, int n) {     // Despues de hacer pruebas, es de lejos el mas eficaz en tamaños muy pequeños, ej: 1Mb, y es el unico al que le afecta positivamente aumentar pageCount, pero conforme aumenta el tamaño su eficacia va disminuyendo exponencialmente, a tal punto de que al llegar a los 5Mb ya es ampliamente superado por mergeSort y quickSort
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapSortAux(array, n, i);
+    }
+    for (int i = n - 1; i > 0; i--) {
+        int copia = array[0];
+        array[0] = array[i];
+        array[i] = copia;
+        heapSortAux(array, i, 0);
     }
 }
 
@@ -90,7 +107,7 @@ void mergeSortAux(PagedArray& array, int izq, int med, int der) {
     delete[] temp2;
 }
 
-void mergeSort(PagedArray& array, int izq, int der) {
+void mergeSort(PagedArray& array, int izq, int der) {    // Despues de hacer pruebas, el mas eficaz de todos en tamaños grandes, aumentar el pageSize tiene efectos positivos pero aumentar el pageCount aumenta mucho los tiempos de compilacion
     if (izq >= der) {
         return;
     }
@@ -100,7 +117,7 @@ void mergeSort(PagedArray& array, int izq, int der) {
     mergeSortAux(array, izq, med, der);
 }
 
-int quickSortAux(PagedArray& array, int bajo, int alto) {
+int quickSortAux(PagedArray& array, int bajo, int alto) {         // Despues de hacer pruebas, es el segundo mas eficaz en tamaños grandes, se comporta de manera casi identica a quickSort, con tiempos de ordenamiento ligeramente mas largos.
     int pivot = array[alto];
     int i = (bajo - 1);
 

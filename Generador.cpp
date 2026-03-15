@@ -9,7 +9,7 @@
 
 int main(int argc, char* argv[]) {
 
-    const int bufferSize = 4096;
+    const int bufferSize = 65536;
     int buffer[bufferSize];
     FILE* ptrPageFile;
 
@@ -35,13 +35,13 @@ int main(int argc, char* argv[]) {
 
     long long sizeConfiguracion = 0;
     if (strcmp(argv[2], "SMALL") == 0) {
-        sizeConfiguracion = 256;
+        sizeConfiguracion = 5;
     }
     else if (strcmp(argv[2], "MEDIUM") == 0) {
-        sizeConfiguracion = 512;
+        sizeConfiguracion = 128;
     }
     else if (strcmp(argv[2], "LARGE") == 0) {
-        sizeConfiguracion = 1024;
+        sizeConfiguracion = 256;
     }
 
     long long sizeBytes = (sizeConfiguracion * 1024LL * 1024LL);

@@ -72,15 +72,15 @@
         fseek(inputPageFile, 0, SEEK_END);
         long long sizeEnBytes = ftell(inputPageFile);
 
-        if (strcmp(argv[6], "mergeSort") == 0 && sizeEnBytes > 67108864) {
+        if (strcmp(argv[6], "heapSort") == 0 && sizeEnBytes > 67108864) {
+            std::cerr << "Error: " << argv[6] << " no es soportado por el tamaño LARGE debido a la complejidad de operaciones." << std::endl;
+            exit(1);
+        }
+        if (strcmp(argv[6], "shellSort") == 0 && sizeEnBytes > 33554432) {
             std::cerr << "Error: " << argv[6] << " no es soportado por los tamaños MEDIUM y LARGE debido a la complejidad de operaciones." << std::endl;
             exit(1);
         }
-        if (strcmp(argv[6], "shellSort") == 0 && sizeEnBytes > 67108864) {
-            std::cerr << "Error: " << argv[6] << " no es soportado por los tamaños MEDIUM y LARGE debido a la complejidad de operaciones." << std::endl;
-            exit(1);
-        }
-        if (strcmp(argv[6], "insertionSort") == 0 && sizeEnBytes > 67108864) {
+        if (strcmp(argv[6], "insertionSort") == 0 && sizeEnBytes > 33554432 ) {
             std::cerr << "Error: " << argv[6] << " no es soportado por los tamaños MEDIUM y LARGE debido a la complejidad de operaciones." << std::endl;
             exit(1);
         }

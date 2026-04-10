@@ -6,6 +6,7 @@
 #include <ostream>
 #include <cstring>
 #include <ctime>
+#include <cstdlib>
 
 int main(int argc, char* argv[]) {
 

@@ -7,6 +7,7 @@
     #include <cstring>
     #include "PagedArray.h"
     #include "AlgoritmosSorting.h"
+    #include "Baseline.h"
 
     int main(int argc, char* argv[]) {
 
@@ -145,4 +146,17 @@
         std::cout << "Tiempo de Ejecucion : " << tiempoEjecucion << " segundos" << std::endl;
         std::cout << "Numero de Page Hit : " << arr.getHitCount() << std::endl;
         std::cout << "Numero de Page Fault : " << arr.getFaultCount() << std::endl;
+
+        std::cout << "\n--- Datos de Baseline (sin paginacion) ---" << std::endl;
+
+        double tiempoBaseline = ejecutarBaseline(filePathOutput, argv[6], arr.getArraySize());
+
+        if (tiempoBaseline < 0) {
+            std::cout << "Baseline: no se pudo ejecutar" << std::endl;
+        } else {
+            double overhead = ((tiempoEjecucion - tiempoBaseline) / tiempoBaseline) * 100.0;
+            std::cout << "Tiempo Baseline          : " << tiempoBaseline << " segundos" << std::endl;
+            std::cout << "Tiempo con Paginacion    : " << tiempoEjecucion << " segundos" << std::endl;
+            std::cout << "Overhead de Paginacion   : " << overhead << "%" << std::endl;
+        }
     }

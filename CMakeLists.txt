@@ -14,4 +14,5 @@ add_executable(sorter
         PagedArray.h
         AlgoritmosSorting.h
         Sorter.cpp
+        Baseline.h
 )

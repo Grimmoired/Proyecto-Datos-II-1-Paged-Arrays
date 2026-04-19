@@ -98,14 +98,12 @@ separados por comas.
 
 **Linux:**
 ```bash
-./sorter -input  -output  -alg 
--pageSize  -pageCount 
+./sorter -input <Path de archivo de input> -output <Path de archivo de output> -alg <Algoritmo> -pageSize <Tamaño PageSize>  -pageCount <Tamaño PageCount>
 ```
 
 **Windows:**
 ```cmd
-sorter.exe -input <INPUT FILE PATH> -output <OUTPUT FILE PATH> -alg <ALGORITMO>
--pageSize <PAGE-SIZE> -pageCount <PAGE-COUNT>
+sorter.exe -input <Path de archivo de input> -output <Path de archivo de output> -alg <Algoritmo> -pageSize <Tamaño PageSize> -pageCount <Tamaño PageCount>
 ```
 
 **Parámetros:**
@@ -126,16 +124,12 @@ sorter.exe -input <INPUT FILE PATH> -output <OUTPUT FILE PATH> -alg <ALGORITMO>
 
 **Ejemplo Linux:**
 ```bash
-./sorter -input /home/usuario/archivos/datos.bin
--output /home/usuario/archivos/resultado.bin
--alg mergeSort -pageSize 10000 -pageCount 4
+./sorter -input /home/usuario/archivos/datos.bin -output /home/usuario/archivos/resultado.bin -alg mergeSort -pageSize 10000 -pageCount 4
 ```
 
 **Ejemplo Windows:**
 ```cmd
-sorter.exe -input C:\usuarios\archivos\datos.bin
--output C:\usuarios\archivos\resultado.bin
--alg mergeSort -pageSize 10000 -pageCount 4
+sorter.exe -input C:\usuarios\archivos\datos.bin -output C:\usuarios\archivos\resultado.bin -alg mergeSort -pageSize 10000 -pageCount 4
 ```
 
 ---
